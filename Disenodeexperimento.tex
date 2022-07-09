@@ -1,0 +1,200 @@
+\documentclass[12pt,twoside,letterpaper]{article}
+%NOTE: This report format is 
+
+\newcommand{\reporttitle}{Experiment 1: Red neuronal Convolucional: Voxenet}
+\newcommand{\reportauthorOne}{Estudiante}
+\newcommand{\cidOne}{your id number}
+\newcommand{\reportauthorTwo}{Asesor}
+\newcommand{\cidTwo}{your id number}
+\newcommand{\reporttype}{Coursework}
+\bibliographystyle{plain}
+
+% include files that load packages and define macros
+\input{includes} % various packages needed for maths etc.
+\input{notation} % short-hand notation and macros
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+% front page
+\input{titlepage}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% table of content
+%If a table of content is needed, simply uncomment the following lines
+%\tableofcontents
+%\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Main document
+\section*{Note:}
+\emph{Este documento es la plantilla para el reporte de los experimentos. No modificar el original. Se debe hacer una copia en su propio repositorio.}
+
+\section{Resumen del experimento}
+
+\subsection{Problema}
+
+\emph{Proveer una descripción general del problema. Usar ecuaciones en caso de que exista un modelo matemático que lo defina. El problema debe estar acotado al experimento no a la tesis completa.}
+
+%Un perceptrón multicapa no es capaz de clasificar con más del 90\% de exactitud cactus y no cactus.
+
+\subsection{Research Questions}
+
+\emph{Escribir la o las preguntas de investigación que se desean resolver. En caso de existir mas de una éstas se deben listar a continuación.}
+%¿La red neuronal puede clasificar puentes?%Escribir la o las preguntas de investigación que se desean resolver
+
+\begin{description}
+\item [Pregunta 1:] Escribir la pregunta de investigación. 
+\item [Pregunta 2:] Escribir la pregunta de investigación.
+\end{description}
+
+%\subsubsection*{Question 1:}
+%¿El puente está completo?
+
+%\subsubsection*{Question 2:  \label{Q2}}
+%¿El puente tiene piezas faltantes?
+
+\subsection{Hipótesis}
+
+\emph{Poner la hipótesis como una relación de dos variables. Usualmente en aprendizaje profundo suponemos que cierta arquitectura o ciertos parámetros mejorarán el desempeño en una tarea determinada.}
+
+\section{Diseño de alto nivel (sujetos y tratamientos)}
+
+\subsection{Objectivo}
+\emph{Describir el objetivo en infinitivo a fin de mostrar que la hipótesis es verdadera.}
+
+\subsection{Sujetos de prueba}
+
+\emph{Describir cada sujeto. Es probable que solo haya uno, definido por la tarea y el conjunto de datos.}
+
+\begin{description}
+    \item [Sujeto 1:] Base de datos $x$
+    \item [Sujeto N:] Describir
+\end{description}
+
+\subsection{Tratamientos}
+
+\emph{Los tratamientos son una combinación de factores que se aplican a cada sujeto. Por ejemplo un tratamiento puede ser una arquitectura de red neuronal innovadora.}
+
+\begin{description}
+    \item [Tratamiento 1]: Arquitectura o método. Descripción de la arquitectura.
+\end{description}
+    
+
+\subsection{Análisis y métricas}
+
+\emph{Describir las métricas que se van a usar para comparar la efectividad de cada tratamieto en cada sujeto.}
+
+\begin{itemize}
+    \item Exactitud (Accuracy): Mide .....
+    \item Recuerdo (Recall): Mide... \\
+    \vdots
+    \item Métrica N: Mide ...
+\end{itemize}
+
+\subsection{Factorial completo}
+
+El factorial completo entre sujetos y tratamientos queda:
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|ll|}
+\hline
+\textbf{ID}  & \multicolumn{1}{l|}{\textbf{Sujeto}} & \textbf{Tratamiento} \\ \hline
+1  & \multicolumn{1}{l|}{Base de datos 1} & Método A          \\ \hline
+2  & \multicolumn{1}{l|}{Base de datos 1}     & Método B          \\ \hline
+%N  & \multicolumn{1}{l|}{SX}     & TY          \\ \hline
+\end{tabular}
+\caption{Tabla de diseño factorial completo.}
+\end{table}
+
+\section{Diseño de bajo nivel (optimización de hiper parámetros)}
+
+\emph{En esta sección se describe la optimización de hyperparámetros para cada tratamiento. Lo deseable es que hagamos un diseño riguroso para cada tratamiento o que se repita el mismo diseño para cada tratamiento cuando éstos sean compatibles. Puede darse el caso que algun tratamiento ya reportado incluya sus propios hyperparámetros por lo cual no hay que optimizarlo. }
+
+\subsection{Tratamiento uno}
+
+\subsubsection{Factores primarios}
+
+\emph{Son los factores que al combinarse determinan el desempeño de un tratamiento.}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Factor}     & \textbf{Valores posibles}   \\ \hline
+Learning rate & $1 \times 10^{-3}$,  $1 \times 10^{-4}$    \\ \hline
+Optimizador & Adam, SGD    \\ \hline
+Tamaño de lote & 64, 32 \\ \hline
+Semillas & A, B \\ \hline
+\end{tabular}
+\caption{Factores primarios}
+\end{table}
+
+\subsubsection{Factores ortogonales}
+
+\emph{Los factores ortogonales son independientes de los otros factores definidos.}
+
+Para disminuir la complejidad del experimento, consideraremos como factores ortogonales: batch size y número de épocas. Si bien tienen cierta influencia en el aprendizaje, ésta es menor que los demás parámetros. En un experimento aislado se determinan los mejores valores. 
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Factor}     & \textbf{Valor}   \\ \hline
+Épocas     & 50    \\ \hline
+Inicialización & Aleatoria \\ \hline
+\end{tabular}
+\caption{Factores ortogonales}
+\end{table}
+
+\subsubsection{Grid search}
+
+\emph{Nota: En este ejemplo se pone grid search pero en caso de usar otro método de optimización se debe reemplazar esta sección por el otro método, e.g. optimización evolutiva.}
+
+\emph{Primero se deben definir que factores se van a usar asi como los valores que tomará cada factor. Una vez determinados se hace la combinación completa en la tabla.}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|l|l|l|}
+\hline
+ID                    & Factor 1 & $\dots$ & Factor N \\ \hline
+1                     &          &                      &           \\ \hline
+$\vdots$ &          &                      &               \\ \hline
+\end{tabular}
+\caption{Rejilla de búsqueda (Grid search).}
+\end{table}
+
+\subsubsection{Validación}
+
+\emph{Describir cómo se hará la validación así como las métricas reportadas}
+Del conjunto de datos se separara un elemento con el que vamos a validar la exactitud de la red neuronal.
+
+
+\subsection{Tratamiento N}
+
+\emph{Repetir para cada tratamiento que se deba entrenar.}
+
+\section{Requerimientos del experimento}
+
+\emph{Definir que requerimientos son necesarios para llevar a cabo el experimento. Al menos se debe especificar: requerimiento de procesamiento (GPU, CPU, NPU), requerimiento espacial (RAM), requerimiento temporal (tiempo de entrenamiento esperado para todo el experimento).}
+
+
+\section{Análisis de resultados}
+
+\emph{¿Se comprobó la hipótesis?}
+
+\emph{¿Se realizó el experimento de acuerdo a los requerimientos?}
+
+\emph{De no finalizar el experimento ¿Por qué no se finalizó?}
+
+
+
+\newpage
+\bibliography{mybib}
+
+
+\end{document}
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 
